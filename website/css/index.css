@@ -1,0 +1,299 @@
+@import url(https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500&display=swap);
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace
+}
+
+body {
+    background-color: #4f4d50;
+    font-family: "Baloo Tamma 2", cursive
+}
+
+button {
+    background-color: #71cc27;
+    padding: 5px 20px;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: .7em;
+    margin: 5px;
+    cursor: pointer
+}
+
+button:hover {
+    opacity: .8
+}
+
+input {
+    padding: 5px;
+    font-size: 1.2em;
+    background-color: #fff6f6;
+    border: none;
+    margin: 5px
+}
+
+a, input {
+    color: #000000
+}
+
+a {
+    font-size: .7em
+}
+
+p {
+    margin: 5px;
+    line-height: 110%;
+    font-size: .8em
+}
+
+.box-container {
+    width: 100vw;
+    height: 100vh
+}
+
+.box, .box-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.box {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    background-color: #e7c735;
+    color: rgb(0, 0, 0)
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 10px;
+    height: 10px
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border-color: #fff transparent;
+    border-style: solid;
+    border-width: 2px;
+    -webkit-animation: lds-dual-ring 1.2s linear infinite;
+    animation: lds-dual-ring 1.2s linear infinite
+}
+
+@-webkit-keyframes lds-dual-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+#home h3 {
+    color: #fff
+}
+
+#home p {
+    color: #f8783e;
+    font-size: .8em
+}
+
+#home input {
+    text-align: center
+}
+
+.question {
+    background-color: #fff;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.question.answered {
+    opacity: .5
+}
+
+.question .question-number {
+    font-size: .8em;
+    background-color: #e9db1d;
+    width: 100%;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    padding: 5px 10px;
+    box-sizing: border-box
+}
+
+.question .question-text {
+    margin: 0;
+    padding: 10px;
+    font-size: .9em;
+    word-break: break-all
+}
+
+.question .question-link {
+    margin: auto 0 0;
+    text-align: right;
+    text-decoration: none;
+    padding-right: 10px;
+    display: inline
+}
+
+.question .question-link a {
+    color: #000000;
+    text-decoration: none
+}
+
+#questions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    grid-gap: 5px;
+    gap: 5px;
+    grid-auto-rows: 1fr;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.async-text-area-container {
+    width: 100%
+}
+
+.async-text-area-container h3 {
+    margin-bottom: 0
+}
+
+.async-text-area-container textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px
+}
+
+.async-text-area-container .async-text-area-button-container {
+    width: 100%;
+    text-align: right
+}
+
+.async-text-area-container .async-text-area-button-container button {
+    margin-right: 0;
+    margin-top: 0
+}
+
+.session-banner {
+    width: 100%;
+    font-size: .8em;
+    background-color: #e7c735;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-items: center
+}
+
+.session-banner p {
+    margin: 0 auto
+}
+
+.session-banner button {
+    font-size: 1em
+}
+
+.session-banner .back-button {
+    position: absolute;
+    background-color: #757272
+}
+
+.layout {
+    margin: 0 auto 30px;
+    max-width: 600px
+}
+
+.big-text {
+    color: #fcfcfc;
+    line-height: 1.3em;
+    font-size: 1.1em
+}
+
+#session-manager-container #input-button-container {
+    display: -webkit-flex;
+    display: flex;
+    margin-bottom: 10px
+}
+
+#session-manager-container #input-container {
+    -webkit-flex: 2 1;
+    flex: 2 1;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: left
+}
+
+#session-manager-container #button-container {
+    -webkit-flex: 1 1;
+    flex: 1 1;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+#session-manager-container input {
+    width: 80%;
+    margin: 0
+}
+
+#session-manager-container label {
+    margin: 0;
+    font-size: .8em;
+    font-weight: 700
+}
+
+#new-button {
+    background-color: #f2a257
+}
+
+#start-button {
+    background-color: #6aa6a6
+}
+
+#stop-button {
+    background-color: #f26157
+}

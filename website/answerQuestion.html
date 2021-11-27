@@ -1,0 +1,133 @@
+<script src="javascript/owner.js"></script>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<div id="root">
+    <div class="App">
+        <div>
+            <div class="session-banner">
+                <button class="back-button" onclick=history.back()>🠤
+                    Back</button>
+                <p class="p">
+                    <span>🟢</span>Session: <span id='sessionIdField'></span>
+                    <span class="session-banner-button">
+                        <button>Refresh</button>
+                    </span>
+                </p>
+            </div>
+            <div class="Layout_layout__3HtPY">
+                <div id="posts"></div>
+                <div class="async-text-area-container">
+                    <h3 class="async-text-area-container" id="answerTitle">Answer Question</h3>
+                    <textarea id="answer" class="async-text-area-container" rows="5"></textarea>
+                    <div class="async-text-area-button-container">
+                        <div class="async-text-area-button-container">
+                            <button id="answerButton">Send!💬</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+
+                        const sessionId = localStorage.sessionId;
+                        document.getElementById("sessionIdField").textContent=sessionId;
+                        var urlParams = new URLSearchParams(window.location.search);
+                        console.log(urlParams)
+                        if (urlParams.has('questionid')) {
+                            var qid = urlParams.get('questionid');
+                            var url = 'http://localhost:3000/questions/'+sessionId+'/'+qid;
+                        }
+                        console.log(url)
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data, textStatus, xhr) {
+                                console.log(data);
+                                if (data != null && data[0].answer!=null) {
+                                    var questionsDisplay = ""
+                                    for (var i = 0; i < data.length; i++) {
+                                        console.log()
+                                        var questionData = data[i];
+                                        questionsRow = `
+                                        <div>
+                                        <h3 id='QID'>Question #${questionData.questionId}</h3>
+                                        <div class="big-text">${questionData.questionPosted}</div>
+                                        <h3 class="async-text-area-container">Answer</h3>
+                                        <div class="big-text">${questionData.answer}</div>
+                                        `;
+
+                                        questionsDisplay += questionsRow;
+                                        console.log(questionsDisplay);
+                                        document.getElementById("answer").style.display= "none";
+                                        document.getElementById("answerTitle").style.display= "none";
+                                        document.getElementById("answerButton").style.display= "none";
+                                    }
+
+                                    $('#posts').html(questionsDisplay);
+
+                                } 
+                                else if(data != null && data[0].answer===null){
+                                    console.log(data);
+                                    var questionsDisplay = ""
+                                    for (var i = 0; i < data.length; i++) {
+                                        console.log()
+                                        var questionData = data[i];
+                                        questionsRow = `
+                                        <div>
+                                        <h3 id='QID'>Question #${questionData.questionId}</h3>
+                                        <div class="BigText-big-text">${questionData.questionPosted}</div>
+                                        `;
+
+                                        questionsDisplay += questionsRow;
+                                        console.log(questionsDisplay);
+                                        document.getElementById("answer").style.display= "block";
+                                        document.getElementById("answerTitle").style.display= "block";
+                                        document.getElementById("answerButton").style.display= "block";
+                                    }
+
+                                    $('#posts').html(questionsDisplay);
+                                }
+                                else {
+                                    console.log("Error");
+                                    $('#msg').html("Update Failed!")
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                console.log('Error in Operation');
+                                $('#msg').html("Update Failed!")
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

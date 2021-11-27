@@ -1,0 +1,132 @@
+<script src="javascript/question.js"></script>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Ask me a question lor</title>
+    <link rel="stylesheet" href="./css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<div id="root">
+    <div class="App">
+        <div>
+            <div class="session-banner">
+                <button class="back-button" onclick=history.back()>🠤
+                    Back</button>
+                <p class="p">
+                    <span>🟢</span>Session: <span id='sessionIdField'></span>
+                    <span class="session-banner-button">
+                        <button id="Refresh">Refresh</button>
+                    </span>
+                </p>
+            </div>
+            <div class="layout">
+                <div class="async-text-area-container">
+                    <h3 class="async-text-area-container">Got Question? 🤔</h3><textarea id="question"
+                        class="async-text-area-container" rows="5"></textarea>
+                    <div class="async-text-area-button-container">
+                        <div class="async-text-area-button-container">
+                            <button id="ask-button">Ask!💬</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="posts">
+                </div>
+                <script>
+                    $(document).ready(function () {
+
+                        var sessionid = localStorage.sessionId;
+                        document.getElementById("sessionIdField").textContent=sessionid;
+                        console.log(sessionid);
+                        var url = `http://localhost:3000/questions/${sessionid}`
+
+                        $.ajax({
+                            url: url,
+                            type: 'GET',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data, textStatus, xhr) {
+                                if (data != null) {
+                                    var questionsDisplay = ""
+                                    for (var i = 0; i < data.length; i++) {
+                                        console.log()
+                                        var questionData = data[i];
+                                        questionsRow = `
+                                        <div class="question">
+                                            <div class="question">
+                                                <p class="question-number">#${i+1}</p>
+                                                <p class="question-text">${questionData.questionPosted}</p>
+                                            <div class="question-link"><span><a class="question-link" href="questionFocused.html?questionid=${questionData.questionId}">View 🔍</a></span></div>
+                                        </div>
+                                    </div>
+                                            `;
+                                        questionsDisplay += questionsRow;
+                                        console.log(questionsDisplay);
+                                    }
+
+                                    $('#posts').html(questionsDisplay);
+
+                                } else {
+                                    console.log("Error");
+                                    $('#msg').html("Update Failed!")
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                console.log('Error in Operation');
+                                $('#msg').html("Update Failed!")
+                            }
+                        });
+
+                        $("#Refresh").click(function () {
+
+                            var sessionid = localStorage.sessionId
+                            console.log(sessionid);
+                            var url = `http://localhost:3000/questions/${sessionid}`
+
+                            $.ajax({
+                                url: url,
+                                type: 'GET',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data, textStatus, xhr) {
+                                    if (data != null) {
+                                        var questionsDisplay = ""
+                                        for (var i = 0; i < data.length; i++) {
+                                            var questionData = data[i];
+                                            questionsRow = `
+                                        <div class="question">
+                                            <div class="question">
+                                                <p class="question-number">#${i+1}</p>
+                                                <p class="question-text">${questionData.questionPosted}</p>
+                                            <div class="question-link"><span><a class="question-link" href="questionFocused.html?questionid=${questionData.questionId}">View 🔍</a></span></div>
+                                        </div>
+                                    </div>
+                                            `;
+                                            questionsDisplay += questionsRow;
+                                        }
+
+                                        $('#posts').html(questionsDisplay);
+
+                                    } else {
+                                        console.log("Error");
+                                        $('#msg').html("Update Failed!")
+                                    }
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    console.log('Error in Operation');
+                                    $('#msg').html("Update Failed!")
+                                }
+                            });
+                            return false;
+
+                        })
+                    });
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
